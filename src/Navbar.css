@@ -2,7 +2,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 6vh;
+    height: 7vh;
 }
 
 .logo{
@@ -43,4 +43,10 @@
     margin-top : -3.5px !important;
     width: 10px !important; 
     height : 10px !important;
+}
+
+.select-container{
+    margin-left: auto;
+    margin-right: 1rem;
+    margin-bottom: .5rem;
 }
