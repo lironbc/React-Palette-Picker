@@ -1,0 +1,117 @@
+.ColorBox{
+    width : 20%;
+    height : 25%;
+    margin: 0 auto;
+    display : inline-block;
+    position: relative;
+    cursor: pointer;
+    margin-top : -4.5px;
+}
+
+.copy-btn{
+    position : absolute;
+    width : 60px;
+    height : 30px;
+    left: 50%;
+    top: 50%;
+    margin-left : -25px;
+    margin-top : -15px;
+    border: none;
+    outline: none;
+    background-color : rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    line-height: 30px;
+    font-size: 1rem;
+    cursor : pointer;
+    text-transform: uppercase;
+    text-align: center;
+    opacity : 0;
+}
+
+.ColorBox:hover .copy-btn{
+    opacity : 1;
+    transition-duration : .3s;
+}
+
+.box-content{
+    position : absolute;
+    left : 0%;
+    bottom : 0%;
+    padding : 5px;
+    font-size : .8rem;
+}
+
+.see-more {
+    position : absolute;
+    right : 0%;
+    bottom : 0%;
+    padding : 5px;
+    background-color : rgba(255, 255, 255, 0.3);
+    color : #ffffff;
+    text-transform: uppercase;
+    font-size : .8rem;
+    width: 60px;
+    text-align: center;
+}
+
+.copy-animation{
+    opacity: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(.1);
+}
+
+.copy-animation.copied {
+    opacity: 1;
+    z-index: 10;
+    transition-duration: 0.6s;
+    transform: scale(10);
+    position: absolute;
+}
+
+.copy-msg{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 11;
+    animation: fade-create 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 4rem;
+}
+
+/* Used to fade in dynamically created message*/
+@keyframes fade-create {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.copy-msg h1{
+    background-color : rgba(255, 255, 255, 0.3);
+    text-shadow : 1px 2px black;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+}
+
+.copy-msg p{
+    font-size: 2rem;
+    padding-top: 0;
+    text-transform: uppercase;
+    font-weight: 100;
+}
