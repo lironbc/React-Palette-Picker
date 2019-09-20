@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
 
 export default class SingleColorPalette extends Component {
     constructor(props){
@@ -26,26 +27,33 @@ export default class SingleColorPalette extends Component {
     }
 
     handleFormatChange(e){
-        console.log("here");
         this.setState({format : e.target.value});
     }
 
     render() {
-        console.log(this._shades);
         const colorBoxes = this._shades.map(c =>
             <ColorBox key={c.name} 
             name={c.name} 
             color={c[this.state.format]}
             activeMore={false} />)
         return (
-            <div className="Palette">
+            <div className="SingleColorPalette Palette">
                 <Navbar
                 handleFormatChange={this.handleFormatChange}
                 activeSlider={false}
                 format={this.state.format} />
+
                 <div className="Palette-colors">
                     {colorBoxes}
+                    <div className="go-back ColorBox">
+                        <Link to={`/palette/${this.props.palette.id}`} 
+                        className="back-btn">Go Back</Link>
+                    </div>
                 </div>
+
+                <footer className="Palette-footer">
+                    {this.props.palette.paletteName}
+                </footer>
             </div>
         )
     }

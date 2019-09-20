@@ -42,7 +42,7 @@ class Palette extends Component {
                 handleSliderChange={this.handleSliderChange}
                 handleFormatChange={this.handleFormatChange}
                 format={this.state.format}
-                activeSlider={false} />
+                activeSlider={true} />
 
                 <div className="Palette-colors">
                     {colors}
