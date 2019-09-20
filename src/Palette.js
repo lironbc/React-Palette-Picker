@@ -29,7 +29,11 @@ class Palette extends Component {
             item => {
             return <ColorBox color={item[this.state.format]}
                         name={item.name} 
-                        key={item.name} />
+                        key={item.name}
+                        paletteId={this.props.palette.id}
+                        id={item.id}
+                        activeMore={true}
+                        />
             }
         );
         return (
@@ -37,11 +41,16 @@ class Palette extends Component {
                 <Navbar level={this.state.level} 
                 handleSliderChange={this.handleSliderChange}
                 handleFormatChange={this.handleFormatChange}
-                format={this.state.format} />
+                format={this.state.format}
+                activeSlider={false} />
 
                 <div className="Palette-colors">
                     {colors}
                 </div>
+
+                <footer className="Palette-footer">
+                    {this.props.palette.paletteName}
+                </footer>
             </div>
         )
     }

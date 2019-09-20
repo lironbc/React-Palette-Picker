@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import {Link} from 'react-router-dom';
 import 'rc-slider/assets/index.css';
 import './Navbar.css';
 
@@ -11,9 +12,10 @@ class Navbar extends Component {
         return (
             <div className="Navbar">
                 <div className="logo">
-                    <a href="/">PALETTE PICKER</a>
+                    <Link to="/">PALETTE PICKER</Link>
                 </div>
 
+                {this.props.activeSlider &&
                 <div className="slider-container">
                     <span>Level {this.props.level}</span>
                     <div className="slider">
@@ -24,6 +26,7 @@ class Navbar extends Component {
                             onAfterChange={this.props.handleSliderChange} />
                     </div>
                 </div>
+                }
                 <div className="select-container">
                         <Select value={this.props.format} onChange={this.props.handleFormatChange}>
                             <MenuItem value="hex">Hex - #ffffff</MenuItem>

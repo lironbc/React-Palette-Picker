@@ -3,5 +3,15 @@
 }
 
 .Palette-colors{
-    height: 90%;
+    height: 88%;
+}
+
+.Palette-footer{
+    height: 5%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1rem;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
 }

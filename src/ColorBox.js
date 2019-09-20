@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ColorBox.css';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {Link} from 'react-router-dom';
 
 class ColorBox extends Component {
 
@@ -22,20 +23,27 @@ class ColorBox extends Component {
     render() {
         const copyClass = this.state.copied ? "copy-animation copied" : "copy-animation";
         return (
+            <CopyToClipboard text={this.props.color} onCopy={this.expandAnimation}>
             <div className="ColorBox" style={{background : this.props.color}}>
                 <div className={copyClass} style={{background : this.props.color}}></div>
                 <div className="box-content">
                     <span>{this.props.name}</span>
                 </div>
-                <CopyToClipboard text={this.props.color} onCopy={this.expandAnimation}>
+                
                     <button className="copy-btn">
                         Copy
                     </button>
-                </CopyToClipboard>
                 
-                <div className="see-more">
-                    <span>More</span>
-                </div>
+                {/* only render More button in multi color palette */}
+                {this.props.activeMore &&
+                <Link to={`/palette/${this.props.paletteId}/${this.props.id}`} 
+                onClick={e => e.stopPropagation()}>
+
+                    <div className="see-more">
+                        <span>More</span>
+                    </div>
+                </Link>
+                }
 
                 {/* Render the word Copied! and the color copied while the copy animation
                     is active */}
@@ -46,6 +54,7 @@ class ColorBox extends Component {
                     </div> 
                 : null}
             </div>
+            </CopyToClipboard>
         )
     }
 }
