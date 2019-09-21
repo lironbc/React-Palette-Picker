@@ -59,6 +59,22 @@
     font-size : .8rem;
 }
 
+.light-txt {
+    color : white;
+}
+
+.dark-txt {
+    color : black;
+}
+
+.see-more.dark-txt{
+    background-color: rgb(0,0,0,.3);
+}
+
+.dark-background {
+    background-color: rgb(0,0,0,.3) !important;
+}
+
 .see-more {
     position : absolute;
     right : 0%;
@@ -71,6 +87,7 @@
     width: 60px;
     text-align: center;
 }
+
 
 .copy-animation{
     opacity: 0;

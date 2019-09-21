@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ColorBox.css';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import chroma from 'chroma-js';
 import {Link} from 'react-router-dom';
 
 class ColorBox extends Component {
@@ -22,15 +23,18 @@ class ColorBox extends Component {
 
     render() {
         const copyClass = this.state.copied ? "copy-animation copied" : "copy-animation";
+        const isDarkColor = chroma(this.props.color).luminance() < .15;
+        const isLightColor = chroma(this.props.color).luminance() >= .6;
         return (
             <CopyToClipboard text={this.props.color} onCopy={this.expandAnimation}>
             <div className="ColorBox" style={{background : this.props.color}}>
                 <div className={copyClass} style={{background : this.props.color}}></div>
                 <div className="box-content">
-                    <span>{this.props.name}</span>
+                    <span className={isDarkColor && "light-txt"}>{this.props.name}</span>
                 </div>
                 
-                    <button className="copy-btn">
+                    <button className={isLightColor ? "copy-btn dark-txt dark-background" :
+                                             "copy-btn"}>
                         Copy
                     </button>
                 
@@ -40,7 +44,7 @@ class ColorBox extends Component {
                 onClick={e => e.stopPropagation()}>
 
                     <div className="see-more">
-                        <span>More</span>
+                        <span className={isLightColor && "see-more dark-txt"}>More</span>
                     </div>
                 </Link>
                 }
@@ -50,7 +54,9 @@ class ColorBox extends Component {
                 {this.state.copied ? 
                     <div className="copy-msg">
                         <h1>Copied!</h1> 
-                        <p>{this.props.color}</p>
+                        <p className={isLightColor && "dark-txt"}>
+                            {this.props.color}
+                        </p>
                     </div> 
                 : null}
             </div>
