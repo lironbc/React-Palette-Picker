@@ -33,6 +33,9 @@ function generatePalette(starterPalette){
     return newPalette;
 }
 
+/* creates an array with black, the color, and white. Chroma can use these
+   three numbers to generate a gradient that goes evenly from one end of this
+   array to the other*/
 function getRange(hexColor){
     const end = "#fff";
     return[
@@ -42,6 +45,12 @@ function getRange(hexColor){
     ];
 }
 
+/* creates an array of colors ranging from very light to very dark
+   of a single hue. See chroma-js for additional details on how this
+   works but it basically does this : calls getRange(see comment there),
+   takes the result and generates a gradient of colors in the LAB color
+   format with the scale being distributed around numberOfColors different
+   colors */
 function generateScale(hexColor, numberOfColors){
     return chroma.scale(getRange(hexColor))
           .mode('lab')

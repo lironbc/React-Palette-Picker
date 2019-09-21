@@ -16,10 +16,14 @@ class Palette extends Component {
         this.handleFormatChange = this.handleFormatChange.bind(this);
     }
 
+    /* Used to update which colors are shown depending on the slider
+       position */
     handleSliderChange(newLevel){
         this.setState({level : newLevel});
     }
 
+    /* sets the text of the dropdown menu in the top right
+        to display the chosen format : hex/rgb/rgba */
     handleFormatChange(e){
         this.setState({format : e.target.value});
     }

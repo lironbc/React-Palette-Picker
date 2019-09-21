@@ -12,9 +12,11 @@ class Navbar extends Component {
         return (
             <div className="Navbar">
                 <div className="logo">
+                    {/* Logo brings you back to home */}
                     <Link to="/">PALETTE PICKER</Link>
                 </div>
 
+                {/* Slider only shows when not in more tab */}
                 {this.props.activeSlider &&
                 <div className="slider-container">
                     <span>Level {this.props.level}</span>
@@ -23,12 +25,14 @@ class Navbar extends Component {
                             min={100}
                             max={900}
                             step={100}
+                            // updates which colors are shown
                             onAfterChange={this.props.handleSliderChange} />
                     </div>
                 </div>
                 }
                 <div className="select-container">
-                        <Select value={this.props.format} onChange={this.props.handleFormatChange}>
+                        <Select value={this.props.format} 
+                        onChange={this.props.handleFormatChange}>
                             <MenuItem value="hex">Hex - #ffffff</MenuItem>
                             <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
                             <MenuItem value="rgba">RGBA - rgba(255,255,255,1.0)</MenuItem>

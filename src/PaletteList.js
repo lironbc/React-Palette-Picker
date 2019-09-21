@@ -44,6 +44,9 @@ class PaletteList extends Component {
         this.goToPalette = this.goToPalette.bind(this);
     }
     
+    /* redirects to a new route based on the palette clicked on.
+       allows for user to click back button to get back to main
+       page */
     goToPalette(id){
         this.props.history.push(id);
     }
