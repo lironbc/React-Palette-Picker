@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import MiniPalette from './MiniPalette';
 import { withStyles } from '@material-ui/styles';
+import {Link} from 'react-router-dom';
 
 const styles = {
     root : {
@@ -33,7 +33,11 @@ const styles = {
         display : "flex",
         color : "white",
         width : "100%",
-        justifyContent : "space-between"
+        justifyContent : "space-between",
+        alignItems : "center",
+        "& a" : {
+            color: "white" 
+        }
     }
 }
 class PaletteList extends Component {
@@ -56,7 +60,8 @@ class PaletteList extends Component {
             <div className={this.props.classes.root}>
                 <div className={this.props.classes.container}>
                     <nav className={this.props.classes.nav}>
-                    React Colors
+                        <h1>React Colors</h1>
+                        <Link to="/palette/new">Create New Palette</Link>
                     </nav>
                 
                     <div className={this.props.classes.MiniPalette}>
