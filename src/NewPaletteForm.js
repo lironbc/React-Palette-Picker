@@ -12,7 +12,6 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { ChromePicker } from 'react-color';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
@@ -77,7 +76,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function NewPaletteForm() {
+const NewPaletteForm = props => {
 
     useEffect( () =>
     ValidatorForm.addValidationRule('isColorNameUnique', (value) =>
@@ -88,6 +87,11 @@ export default function NewPaletteForm() {
     ValidatorForm.addValidationRule('isColorUnique', (value) =>
     colors.every((item) => 
         curColor !== item.color
+    ), []),
+
+    ValidatorForm.addValidationRule('isPaletteNameUnique', (value) =>
+    props.palettes.every((palette) => 
+        value.toLowerCase() !== palette.paletteName.toLowerCase()
     ), [])
         
     );
@@ -98,6 +102,7 @@ export default function NewPaletteForm() {
   const [curColor, setColor] = React.useState('teal');
   const [colors, addNewColor] = React.useState([]);
   const [curName, updateName] = React.useState('');
+  const [curPaletteName, updatePaletteName] = React.useState('');
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -121,7 +126,26 @@ export default function NewPaletteForm() {
       updateName(e.target.value);
   }
 
+  function handlePaletteChange(e){
+      updatePaletteName(e.target.value);
+  }
 
+  function addNewPalette(){
+      let newName = curPaletteName;
+      const newPalette = {
+          paletteName : newName,
+          id : newName.toLowerCase().replace(/ /g, "-"),
+          colors : colors
+      }
+
+      props.savePalette(newPalette);
+      props.history.push("/");
+  }
+
+  function removeColor(name){
+      let newColors = colors.filter((color) => color.name !== name);
+      addNewColor(newColors);
+  }
 
   return (
     <div className={classes.root}>
@@ -145,6 +169,24 @@ export default function NewPaletteForm() {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
+
+            <ValidatorForm onSubmit={addNewPalette}>
+                <TextValidator 
+                label="Palette Name"
+                value={curPaletteName}
+                onChange={handlePaletteChange}
+                validators={["required", "isPaletteNameUnique"]}
+                errorMessages={["Enter palette name", "Name already used"]}
+                />
+                    <Button variant="contained" 
+                    color="secondary" 
+                    className={classes.button}
+                    type="submit">
+                        Add new palette
+                    </Button>
+            </ValidatorForm>
+
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -158,7 +200,7 @@ export default function NewPaletteForm() {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
@@ -206,8 +248,14 @@ export default function NewPaletteForm() {
       >
 
         <div className={classes.drawerHeader} />
-        {colors.map(color => <DraggableColorBox color={color.color} key={color.name} />)}
+        {colors.map(color => <DraggableColorBox 
+            color={color.color} 
+            key={color.name}
+            name={color.name}
+            removeColor={removeColor} />)}
       </main>
     </div>
   );
 }
+
+export default NewPaletteForm;

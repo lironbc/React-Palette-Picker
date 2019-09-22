@@ -9,12 +9,25 @@ import {Route, Switch} from 'react-router-dom';
 import SingleColorPalette from './SingleColorPalette';
 
 class App extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = { palettes : seedColors }
+
+        this.savePalette = this.savePalette.bind(this);
+        this.findPalette = this.findPalette.bind(this);
+    }
+
     /* Helper function used to get the color to generate a palette for
        when clicking more. This returns the specific color and then
        generatePalette will create the gradient for the color.
      */
     findPalette(id){
-        return seedColors.find((palette) => palette.id === id);
+        return this.state.palettes.find((palette) => palette.id === id);
+    }
+
+    savePalette(newPalette){
+        this.setState({palettes : [...this.state.palettes,newPalette]});
     }
 
     render (){
@@ -23,10 +36,14 @@ class App extends Component {
             {/* Home route contains the list of palettes to view */}
             <Switch>
                 <Route exact path="/" render={(routeProps) => <PaletteList {...routeProps}
-                palettes={seedColors}/>}/>
+                palettes={this.state.palettes}/>}/>
 
                 {/* Used to create new palette */}
-                <Route exact path="/palette/new" render={() => <NewPaletteForm />} />
+                <Route exact path="/palette/new" render={(routeProps) => 
+                    <NewPaletteForm 
+                    savePalette={this.savePalette}
+                    palettes={this.state.palettes}
+                    {...routeProps}/>} />
 
                 {/* View of an individual palette */}
                 <Route exact path="/palette/:id" 
