@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 import clsx from 'clsx';
+import {Link} from 'react-router-dom';
 import DraggableColorBox from './DraggableColorBox';
+import DraggableColorList from './DraggableColorList';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,6 +17,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import arrayMove from 'array-move';
 
 
 const drawerWidth = 400;
@@ -77,6 +80,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const NewPaletteForm = props => {
+    const MAX_NUM_COLORS = 20;
 
     useEffect( () =>
     ValidatorForm.addValidationRule('isColorNameUnique', (value) =>
@@ -92,15 +96,18 @@ const NewPaletteForm = props => {
     ValidatorForm.addValidationRule('isPaletteNameUnique', (value) =>
     props.palettes.every((palette) => 
         value.toLowerCase() !== palette.paletteName.toLowerCase()
-    ), [])
+    ), []),
+
+    ValidatorForm.addValidationRule('isNotEmpty', () =>
+    props.palettes.every(palette => palette.colors.length !== 0), [])
         
     );
 
   const classes = useStyles();
-  const theme = useTheme();
+//   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [curColor, setColor] = React.useState('teal');
-  const [colors, addNewColor] = React.useState([]);
+  const [colors, updateColors] = React.useState(props.palettes[0].colors);
   const [curName, updateName] = React.useState('');
   const [curPaletteName, updatePaletteName] = React.useState('');
 
@@ -116,9 +123,13 @@ const NewPaletteForm = props => {
       setColor(newColor.hex);
   }
 
+  function clearPalette(){
+    updateColors([]);
+  }
+
   function addingNewColor(){
       const newColor = {color : curColor, name : curName}
-      addNewColor([...colors, newColor]);
+      updateColors([...colors, newColor]);
       updateName('');
   }
 
@@ -144,8 +155,25 @@ const NewPaletteForm = props => {
 
   function removeColor(name){
       let newColors = colors.filter((color) => color.name !== name);
-      addNewColor(newColors);
+      updateColors(newColors);
   }
+
+  function addRandomColor(){
+      updateColors([...colors, pickRandomColor()])
+  }
+
+  function pickRandomColor(){
+      let arrayToPick = Math.floor(Math.random() * props.palettes.length);
+      let array = props.palettes[arrayToPick].colors;
+      const colorPicked = array[Math.floor(Math.random() * array.length)];
+      console.log(colorPicked);
+      return colorPicked;
+  }
+
+  const onSortEnd = ({oldIndex, newIndex}) => {
+    let newColors = (colors) => arrayMove(colors, oldIndex, newIndex);
+    updateColors(newColors);
+  };
 
   return (
     <div className={classes.root}>
@@ -178,6 +206,15 @@ const NewPaletteForm = props => {
                 validators={["required", "isPaletteNameUnique"]}
                 errorMessages={["Enter palette name", "Name already used"]}
                 />
+
+                    <Link to="/">
+                        <Button variant="contained" 
+                    color="primary" 
+                    className={classes.button}>
+                            Go Back
+                        </Button>
+                    </Link>
+
                     <Button variant="contained" 
                     color="secondary" 
                     className={classes.button}
@@ -208,11 +245,18 @@ const NewPaletteForm = props => {
         <List>
             <Typography variant="h4">Design Your Palette</Typography>
 
-            <Button variant="contained" color="secondary" className={classes.button}>
+            <Button variant="contained" 
+            color="secondary" 
+            className={classes.button}
+            onClick={clearPalette}>
                 Clear Palette
             </Button>
 
-            <Button variant="contained" color="primary" className={classes.button}>
+            <Button variant="contained" 
+            color="primary" 
+            className={classes.button}
+            onClick={addRandomColor}
+            disabled={colors.length >= MAX_NUM_COLORS}>
                 Random Color
             </Button>
 
@@ -223,18 +267,25 @@ const NewPaletteForm = props => {
                 <TextValidator 
                 value={curName} 
                 onChange={handleChange}
-                validators={['required', 'isColorNameUnique', 'isColorUnique']}
+                validators={['required',
+                 'isColorNameUnique', 
+                 'isColorUnique', 
+                 'isNotEmpty']}
                 errorMessages={['This field is required', 
                 'Color name must be unique', 
-                'Color already used!']}/>
+                'Color already used!',
+                'Palette must not be empty!']}/>
 
                 <Button variant="contained" 
                 color='primary'
                 className={classes.button}
-                style={{backgroundColor : curColor}}
+                style={colors.length >= MAX_NUM_COLORS ? 
+                    {backgroundColor : "rgba(0,0,0,.5)"} :
+                    {backgroundColor : curColor} }
                 type="submit"
+                disabled={colors.length >= MAX_NUM_COLORS}
                 >
-                    Add Color
+                    {colors.length >= MAX_NUM_COLORS ? "Palette Full" : "Add Color"}
                 </Button>
             </ValidatorForm>
 
@@ -248,11 +299,13 @@ const NewPaletteForm = props => {
       >
 
         <div className={classes.drawerHeader} />
-        {colors.map(color => <DraggableColorBox 
-            color={color.color} 
-            key={color.name}
-            name={color.name}
-            removeColor={removeColor} />)}
+
+        <DraggableColorList
+        colors={colors}
+        removeColor={removeColor}
+        axis="xy"
+        onSortEnd={onSortEnd} />
+
       </main>
     </div>
   );
