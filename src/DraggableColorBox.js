@@ -6,12 +6,12 @@ import {SortableElement, SortableContainer} from 'react-sortable-hoc';
 const styles = {
     root : {
         width : "20%",
-        height : "25%",
+        height : "23%",
         margin: "0 auto",
         display : "inline-block",
         position: "relative",
         cursor: "pointer",
-        marginTop : "-5px",
+        marginTop : "-6px",
         "&:hover svg":{
             color: "white",
             transform : "scale(1.5)"
