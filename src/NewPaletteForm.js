@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
-import DraggableColorBox from './DraggableColorBox';
 import PaletteMetaForm from './PaletteMetaForm';
 import DraggableColorList from './DraggableColorList';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -202,8 +201,10 @@ const NewPaletteForm = props => {
   }
 
   function show(){
-      console.log(showing);
       showForm(true);
+  }
+  function hide(){
+      showForm(false);
   }
 
   function pickRandomColor(){
@@ -256,15 +257,20 @@ const NewPaletteForm = props => {
                 Save
                 </Button>
             </div>
-            {showing && 
-                <PaletteMetaForm
+            
+
+            
+      </AppBar>
+
+        {showing && 
+        <PaletteMetaForm
                 savePalette={props.savePalette}
-                open={true}
+                open={showing}
+                hide={hide}
                 colors={colors}
                 palettes={props.palettes}
-                />
-            }
-      </AppBar>
+        />
+        }
       <Drawer
         className={classes.drawer}
         variant="persistent"

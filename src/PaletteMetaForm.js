@@ -11,7 +11,7 @@ import {withRouter} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     button : {
-        width : "50%"
+        // width : "50%"
     },
 
     navBtn: {
@@ -34,7 +34,7 @@ const PaletteMetaForm = props => {
     });
 
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(props.open);
     const [curPaletteName, updatePaletteName] = React.useState('');
   
     const handleClickOpen = () => {
@@ -43,6 +43,7 @@ const PaletteMetaForm = props => {
   
     const handleClose = () => {
       setOpen(false);
+      props.hide();
     };
 
     function handlePaletteChange(e){
@@ -63,7 +64,7 @@ const PaletteMetaForm = props => {
   
     return (
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+          <DialogTitle id="form-dialog-title">New Palette Name</DialogTitle>
           <ValidatorForm onSubmit={addNewPalette}>
           <DialogContent>
             <DialogContentText>
@@ -84,12 +85,12 @@ const PaletteMetaForm = props => {
               Cancel
             </Button>
             <div className={classes.navBtn}>
-                    <Button variant="contained" 
-                    color="secondary" 
-                    className={classes.button}
-                    type="submit">
-                        Add new palette
-                    </Button>
+                <Button variant="contained" 
+                color="secondary" 
+                className={classes.button}
+                type="submit">
+                    Add new palette
+                </Button>
             </div>
           </DialogActions>
           </ValidatorForm>

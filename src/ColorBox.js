@@ -39,7 +39,7 @@ class ColorBox extends Component {
                     to give the illusion that the background color takes up entire background */}
                 <div className={copyClass} style={{background : this.props.color}}></div>
                 <div className="box-content">
-                    <span className={isDarkColor && "light-txt"}>{this.props.name}</span>
+                    <span className={isDarkColor ? "light-txt" : ""}>{this.props.name}</span>
                 </div>
                 
                     <button className={isLightColor ? "copy-btn dark-txt dark-background" :
@@ -53,7 +53,7 @@ class ColorBox extends Component {
                 onClick={e => e.stopPropagation()}>
 
                     <div className="see-more">
-                        <span className={isLightColor && "see-more dark-txt"}>More</span>
+                        <span className={isLightColor ? "see-more dark-txt" : ""}>More</span>
                     </div>
                 </Link>
                 }
