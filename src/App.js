@@ -12,10 +12,12 @@ class App extends Component {
     constructor(props){
         super(props);
 
-        this.state = { palettes : seedColors }
+        const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+        this.state = { palettes : savedPalettes || seedColors }
 
         this.savePalette = this.savePalette.bind(this);
         this.findPalette = this.findPalette.bind(this);
+        this.deletePalette = this.deletePalette.bind(this);
     }
 
     /* Helper function used to get the color to generate a palette for
@@ -27,7 +29,18 @@ class App extends Component {
     }
 
     savePalette(newPalette){
-        this.setState({palettes : [...this.state.palettes,newPalette]});
+        this.setState({palettes : [...this.state.palettes,newPalette]},
+            this.syncLocalStorage);
+    }
+
+    deletePalette(id){
+        this.setState(st => ({ palettes : st.palettes.filter(palette => palette.id !== id)}),
+            this.syncLocalStorage)
+    }
+
+    //saves palettes to local storage
+    syncLocalStorage(){
+        window.localStorage.setItem("palettes", JSON.stringify(this.state.palettes));
     }
 
     render (){
@@ -35,7 +48,9 @@ class App extends Component {
         <div className="App">
             {/* Home route contains the list of palettes to view */}
             <Switch>
-                <Route exact path="/" render={(routeProps) => <PaletteList {...routeProps}
+                <Route exact path="/" render={(routeProps) => <PaletteList 
+                {...routeProps}
+                deletePalette={this.deletePalette}
                 palettes={this.state.palettes}/>}/>
 
                 {/* Used to create new palette */}

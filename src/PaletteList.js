@@ -25,8 +25,9 @@ const styles = {
         boxSizing : "border-box",
         width : "100%",
         display : "grid",
-        gridTemplateColumns : "repeat(3, 30%)",
-        gridGap : "5%"
+        gridTemplateColumns : "repeat(3, 33%)",
+        gridGap : "3%",
+        marginBottom : "200%"
     },
 
     nav : {
@@ -36,7 +37,7 @@ const styles = {
         justifyContent : "space-between",
         alignItems : "center",
         "& a" : {
-            color: "white" 
+            color: "white"
         }
     }
 }
@@ -67,9 +68,10 @@ class PaletteList extends Component {
                     <div className={this.props.classes.MiniPalette}>
                         {this.props.palettes.map(
                             (palette) =>
-                            <MiniPalette {...palette} 
-                            key={palette.paletteName} 
-                            handleClick={this.goToPalette} />
+                                <MiniPalette {...palette} 
+                                key={palette.paletteName}
+                                deletePalette={this.props.deletePalette} 
+                                handleClick={this.goToPalette} />
                         )}
                     </div>
                 </div>

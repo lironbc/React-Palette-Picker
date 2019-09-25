@@ -3,6 +3,35 @@ import './ColorBox.css';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import chroma from 'chroma-js';
 import {Link} from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
+import sizes from './sizes';
+
+const styles = {
+    colorBox : {
+        width : "20%",
+        height : "25%",
+        margin: "0 auto",
+        display : "inline-block",
+        position: "relative",
+        cursor: "pointer",
+        marginTop : "-4.5px",
+
+        [sizes.down("lg")] : {
+            width : "25%",
+            height : props => props.activeMore ? "20%" : "10%"
+        },
+
+        [sizes.down("md")] : {
+            width : "50%",
+            height : props => props.activeMore ? "10%" : "10%"
+        },
+
+        [sizes.down("xs")] : {
+            width : "100%",
+            height : props => props.activeMore ? "5.3%" : "10%"
+        }
+    }
+}
 
 class ColorBox extends Component {
 
@@ -34,7 +63,7 @@ class ColorBox extends Component {
             /* on a click, the text copied to clipboard is the color. This is passed down
                in hex, rgb, or rgba formats */
             <CopyToClipboard text={this.props.color} onCopy={this.expandAnimation}>
-            <div className="ColorBox" style={{background : this.props.color}}>
+            <div className={this.props.classes.colorBox} style={{background : this.props.color}}>
                 {/* Div with the same color that will expand while color is being copied
                     to give the illusion that the background color takes up entire background */}
                 <div className={copyClass} style={{background : this.props.color}}></div>
@@ -73,4 +102,4 @@ class ColorBox extends Component {
     }
 }
 
-export default ColorBox;
+export default withStyles(styles)(ColorBox);

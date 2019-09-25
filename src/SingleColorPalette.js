@@ -2,8 +2,36 @@ import React, { Component } from 'react'
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
+import sizes from './sizes';
 
-export default class SingleColorPalette extends Component {
+const styles = {
+    SingleColorPalette :{
+        "& colorBox" : {
+            height : "50%"
+        },
+        height: "100vh"
+    },
+
+    colorBox : {
+        width : "20%",
+        height : "25%",
+        margin: "0 auto",
+        display : "inline-block",
+        position: "relative",
+        cursor: "pointer",
+        marginTop : "-4.5px",
+        [sizes.down("xs")] : {
+            width : "100%"
+        }
+    },
+
+    goBack : {
+        backgroundColor : "black"
+    }
+}
+
+class SingleColorPalette extends Component {
     constructor(props){
         super(props);
 
@@ -43,7 +71,7 @@ export default class SingleColorPalette extends Component {
             color={c[this.state.format]}
             activeMore={false} />)
         return (
-            <div className="SingleColorPalette Palette">
+            <div className={this.props.classes.SingleColorPalette}>
                 {/* create navbar without slider */}
                 <Navbar
                 handleFormatChange={this.handleFormatChange}
@@ -53,7 +81,7 @@ export default class SingleColorPalette extends Component {
                 {/* show colors and a go back link in the bottom right box */}
                 <div className="Palette-colors">
                     {colorBoxes}
-                    <div className="go-back ColorBox">
+                    <div className={`${this.props.classes.goBack} ${this.props.classes.colorBox} `}>
                         <Link to={`/palette/${this.props.palette.id}`} 
                         className="back-btn">Go Back</Link>
                     </div>
@@ -67,3 +95,5 @@ export default class SingleColorPalette extends Component {
         )
     }
 }
+
+export default withStyles(styles)(SingleColorPalette);

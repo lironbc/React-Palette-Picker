@@ -10,10 +10,6 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {withRouter} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
-    button : {
-        // width : "50%"
-    },
-
     navBtn: {
         "& button" : {
             margin : "10px",
