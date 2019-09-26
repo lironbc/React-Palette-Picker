@@ -3,15 +3,39 @@ import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import {Link} from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
 import 'rc-slider/assets/index.css';
 import './Navbar.css';
+import sizes from './sizes';
+
+const styles = {
+    
+    logo : {
+        marginRight: "15px",
+        padding: "0 13px",
+        fontSize: "18px",
+        background: "#eceff1",
+        fontFamily: "Roboto",
+        height: "100%",
+        display: "flex",
+        alignItems : "center",
+        "& a" : {
+            textDecoration: "none",
+            color: "black"
+        },
+
+        [sizes.down("xs")] : {
+            display : "none"
+        }
+    }
+}
 
 class Navbar extends Component {
     static defaultProps = {format : "hex"};
     render() {
         return (
             <div className="Navbar">
-                <div className="logo">
+                <div className={this.props.classes.logo}>
                     {/* Logo brings you back to home */}
                     <Link to="/">PALETTE PICKER</Link>
                 </div>
@@ -43,4 +67,4 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+export default withStyles(styles)(Navbar);

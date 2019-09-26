@@ -5,22 +5,6 @@
     height: 7%;
 }
 
-.logo{
-    margin-right: 15px;
-    padding: 0 13px;
-    font-size: 18px;
-    background: #eceff1;
-    font-family: Roboto;
-    height: 100%;
-    display: flex;
-    align-items : center;
-}
-
-.logo a {
-    text-decoration: none;
-    color: black;
-}
-
 .slider{
     width: 340px;
     display: inline-block;
