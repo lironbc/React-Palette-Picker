@@ -9,7 +9,7 @@ import sizes from './sizes';
 const styles = {
     colorBox : {
         width : "20%",
-        height : "25%",
+        height : props => props.activeMore ? "25%" : "50%",
         margin: "0 auto",
         display : "inline-block",
         position: "relative",
@@ -18,17 +18,17 @@ const styles = {
 
         [sizes.down("lg")] : {
             width : "25%",
-            height : props => props.activeMore ? "20%" : "10%"
+            height : props => props.activeMore ? "20%" : "33.3%"
         },
 
         [sizes.down("md")] : {
             width : "50%",
-            height : props => props.activeMore ? "10%" : "10%"
+            height : props => props.activeMore ? "10%" : "20%"
         },
 
         [sizes.down("xs")] : {
             width : "100%",
-            height : props => props.activeMore ? "5.3%" : "10%"
+            height : props => props.activeMore ? "5%" : "10%"
         }
     }
 }
