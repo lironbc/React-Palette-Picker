@@ -27,6 +27,15 @@ const styles = {
         [sizes.down("xs")] : {
             display : "none"
         }
+    },
+    slider : {
+        width: "340px",
+        display: "inline-block",
+        padding: "0 10px",
+
+        [sizes.down("md")] : {
+            width : "150px"
+        }
     }
 }
 
@@ -44,7 +53,7 @@ class Navbar extends Component {
                 {this.props.activeSlider &&
                 <div className="slider-container">
                     <span>Level {this.props.level}</span>
-                    <div className="slider">
+                    <div className={this.props.classes.slider}>
                         <Slider defaultValue={this.props.level}
                             min={100}
                             max={900}
