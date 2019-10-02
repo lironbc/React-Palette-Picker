@@ -33,7 +33,7 @@ const styles = {
         display: "inline-block",
         padding: "0 10px",
 
-        [sizes.down("md")] : {
+        [sizes.down("sm")] : {
             width : "150px"
         }
     }

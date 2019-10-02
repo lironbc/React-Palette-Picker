@@ -18,7 +18,8 @@ import { ChromePicker } from 'react-color';
 import Button from '@material-ui/core/Button';
 import arrayMove from 'array-move';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-
+import sizes from './sizes';
+import seedColors from './seedColors';
 
 const drawerWidth = 400;
 
@@ -36,7 +37,15 @@ const useStyles = makeStyles(theme => ({
     flexDirection : "row",
     justifyContent : "space-between",
     alignItems : "center",
-    height : "64px"
+    height : "64px",
+    [sizes.down("sm")] : {
+      height : "60px"
+    },
+
+    [sizes.down("xs")]  : {
+      height : "50px"
+    }
+
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -100,7 +109,7 @@ const useStyles = makeStyles(theme => ({
       width : "90%",
       height : "80%",
       display : "flex",
-      marginTop : "1rem",
+      // marginTop : "1rem",
       flexDirection : "column",
       justifyContent : "center",
       alignItems : "center",
@@ -114,9 +123,9 @@ const useStyles = makeStyles(theme => ({
 
   addButton : {
       width : "100%",
-      padding : "1rem",
-      marginTop : "-.6rem",
-      fontSize : "1.2rem"
+      padding : ".2rem",
+      marginTop : ".2rem",
+      fontSize : "1rem"
   },
 
   colorInput : {
@@ -161,7 +170,7 @@ const NewPaletteForm = props => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [curColor, setColor] = React.useState('teal');
-  const [colors, updateColors] = React.useState(props.palettes[0].colors);
+  const [colors, updateColors] = React.useState(seedColors[0].colors);
   const [curName, updateName] = React.useState('');
   const [showing, showForm] = React.useState(false);
   
@@ -209,9 +218,14 @@ const NewPaletteForm = props => {
   }
 
   function pickRandomColor(){
-      let arrayToPick = Math.floor(Math.random() * props.palettes.length);
-      let array = props.palettes[arrayToPick].colors;
-      const colorPicked = array[Math.floor(Math.random() * array.length)];
+      let arrayToPick = Math.floor(Math.random() * seedColors.length);
+      let array = seedColors[arrayToPick].colors;
+      let isDuplicateColor = true;
+      let colorPicked;
+      while(isDuplicateColor){
+        colorPicked = array[Math.floor(Math.random() * array.length)];
+        isDuplicateColor = colors.some(color => color.name === colorPicked.name)
+      }
       return colorPicked;
   }
 
@@ -314,7 +328,9 @@ const NewPaletteForm = props => {
                 color={curColor} 
                 onChangeComplete={setNewColor}/>
 
-                <ValidatorForm onSubmit={addingNewColor}>
+                <ValidatorForm
+                 onSubmit={addingNewColor}
+                 instantValidate={false}>
                     <TextValidator 
                     value={curName}
                     variant="filled"
@@ -358,7 +374,8 @@ const NewPaletteForm = props => {
         colors={colors}
         removeColor={removeColor}
         axis="xy"
-        onSortEnd={onSortEnd} />
+        onSortEnd={onSortEnd}
+        distance={20} />
 
       </main>
     </div>

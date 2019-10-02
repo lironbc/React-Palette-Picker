@@ -92,7 +92,7 @@ class ColorBox extends Component {
                 {this.state.copied && 
                     <div className="copy-msg">
                         <h1>Copied!</h1> 
-                        <p className={isLightColor && "dark-txt"}>
+                        <p className={isLightColor ? "dark-txt" : null}>
                             {this.props.color}
                         </p>
                     </div> }
