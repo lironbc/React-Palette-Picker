@@ -2,7 +2,7 @@
   "name": "color-app",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://lironbc.github.io/React-Palette-Picker/",
+  "homepage" : "https://lironbc.github.io/React-Palette-Picker/", 
   "dependencies": {
     "@material-ui/core": "^4.4.2",
     "@material-ui/icons": "^4.4.1",
