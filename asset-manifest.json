@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/React-Palette-Picker/static/css/main.6926d412.chunk.css",
-    "main.js": "/React-Palette-Picker/static/js/main.bfe9b589.chunk.js",
-    "main.js.map": "/React-Palette-Picker/static/js/main.bfe9b589.chunk.js.map",
+    "main.css": "/React-Palette-Picker/static/css/main.b8f4545d.chunk.css",
+    "main.js": "/React-Palette-Picker/static/js/main.44738013.chunk.js",
+    "main.js.map": "/React-Palette-Picker/static/js/main.44738013.chunk.js.map",
     "runtime~main.js": "/React-Palette-Picker/static/js/runtime~main.ce171d02.js",
     "runtime~main.js.map": "/React-Palette-Picker/static/js/runtime~main.ce171d02.js.map",
     "static/css/2.96479aa2.chunk.css": "/React-Palette-Picker/static/css/2.96479aa2.chunk.css",
-    "static/js/2.b5d4a8b5.chunk.js": "/React-Palette-Picker/static/js/2.b5d4a8b5.chunk.js",
-    "static/js/2.b5d4a8b5.chunk.js.map": "/React-Palette-Picker/static/js/2.b5d4a8b5.chunk.js.map",
+    "static/js/2.b5937e85.chunk.js": "/React-Palette-Picker/static/js/2.b5937e85.chunk.js",
+    "static/js/2.b5937e85.chunk.js.map": "/React-Palette-Picker/static/js/2.b5937e85.chunk.js.map",
     "index.html": "/React-Palette-Picker/index.html",
-    "precache-manifest.e0812adda536dca79b9cbd621cff60a5.js": "/React-Palette-Picker/precache-manifest.e0812adda536dca79b9cbd621cff60a5.js",
+    "precache-manifest.77cb3bcf78f249e3c0d6ea18a47159be.js": "/React-Palette-Picker/precache-manifest.77cb3bcf78f249e3c0d6ea18a47159be.js",
     "service-worker.js": "/React-Palette-Picker/service-worker.js",
     "static/css/2.96479aa2.chunk.css.map": "/React-Palette-Picker/static/css/2.96479aa2.chunk.css.map",
-    "static/css/main.6926d412.chunk.css.map": "/React-Palette-Picker/static/css/main.6926d412.chunk.css.map",
+    "static/css/main.b8f4545d.chunk.css.map": "/React-Palette-Picker/static/css/main.b8f4545d.chunk.css.map",
     "static/media/bg.svg": "/React-Palette-Picker/static/media/bg.abc613a5.svg"
   }
 }
