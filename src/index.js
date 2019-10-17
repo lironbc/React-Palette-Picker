@@ -5,7 +5,12 @@ import App from './App';
 import { HashRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render( <HashRouter> <App /> </HashRouter>, document.getElementById('root'));
+ReactDOM.render( 
+    //HashRouter allows for default to React Router vs server-side routing
+    //when hosted online
+    <HashRouter> 
+        <App /> 
+    </HashRouter>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

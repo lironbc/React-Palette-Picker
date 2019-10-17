@@ -1,36 +1,35 @@
-.Navbar{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 7%;
+.Navbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 7%;
 }
 
-.slider{
-    width: 340px;
-    display: inline-block;
-    padding: 0 10px;
+.slider {
+  width: 340px;
+  display: inline-block;
+  padding: 0 10px;
 }
 
 /* Overriding default colors on slider */
-.rc-slider-track{
-    background : none !important;
+.rc-slider-track {
+  background: none !important;
 }
 
 .rc-slider-handle,
 .rc-slider-handle:active,
 .rc-slider-handle:focus,
-.rc-slider-handle:hover
-{
-    border: none !important;
-    background : #7cb960 !important;
-    box-shadow : none !important;
-    margin-top : -3.5px !important;
-    width: 10px !important; 
-    height : 10px !important;
+.rc-slider-handle:hover {
+  border: none !important;
+  background: #7cb960 !important;
+  box-shadow: none !important;
+  margin-top: -3.5px !important;
+  width: 10px !important;
+  height: 10px !important;
 }
 
-.select-container{
-    margin-left: auto;
-    margin-right: 1rem;
-    margin-bottom: .5rem;
+.select-container {
+  margin-left: auto;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
 }
