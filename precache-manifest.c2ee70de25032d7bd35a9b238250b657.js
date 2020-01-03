@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "53f1f6b8d25910f9296ceb141a065a3e",
+    "revision": "0afadc9332820e904f93990a348aed1b",
     "url": "/React-Palette-Picker/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/React-Palette-Picker/static/css/2.96479aa2.chunk.css"
   },
   {
-    "revision": "b7083196bc9d06768cc0",
+    "revision": "abdd72857ce915f043a8",
     "url": "/React-Palette-Picker/static/css/main.77542ed0.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/React-Palette-Picker/static/js/2.b5937e85.chunk.js"
   },
   {
-    "revision": "b7083196bc9d06768cc0",
-    "url": "/React-Palette-Picker/static/js/main.6cb6d3b5.chunk.js"
+    "revision": "abdd72857ce915f043a8",
+    "url": "/React-Palette-Picker/static/js/main.5258b28e.chunk.js"
   },
   {
     "revision": "2ea30ddd4790b683d571",
